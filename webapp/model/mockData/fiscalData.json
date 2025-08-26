@@ -1,0 +1,114 @@
+{
+  "fiscalInformation": [
+    {
+      "fiscalYear": 2007,
+      "fiscalPeriod": "006",
+      "fiscalYearPeriod": "006/2007",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2007",
+      "fiscalWeek": 18,
+      "fiscalYearWeek": "18/2007",
+      "fiscalDayOfYear": 206,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2019,
+      "fiscalPeriod": "171",
+      "fiscalYearPeriod": "171/2019",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2019",
+      "fiscalWeek": 30,
+      "fiscalYearWeek": "30/2019",
+      "fiscalDayOfYear": 74,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2006,
+      "fiscalPeriod": "639",
+      "fiscalYearPeriod": "639/2006",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2006",
+      "fiscalWeek": 45,
+      "fiscalYearWeek": "45/2006",
+      "fiscalDayOfYear": 140,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2009,
+      "fiscalPeriod": "528",
+      "fiscalYearPeriod": "528/2009",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2009",
+      "fiscalWeek": 49,
+      "fiscalYearWeek": "49/2009",
+      "fiscalDayOfYear": 209,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2017,
+      "fiscalPeriod": "951",
+      "fiscalYearPeriod": "951/2017",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2017",
+      "fiscalWeek": 7,
+      "fiscalYearWeek": "07/2017",
+      "fiscalDayOfYear": 192,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2023,
+      "fiscalPeriod": "123",
+      "fiscalYearPeriod": "123/2023",
+      "fiscalQuarter": 2,
+      "fiscalYearQuarter": "2/2023",
+      "fiscalWeek": 25,
+      "fiscalYearWeek": "25/2023",
+      "fiscalDayOfYear": 115,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2022,
+      "fiscalPeriod": "345",
+      "fiscalYearPeriod": "345/2022",
+      "fiscalQuarter": 3,
+      "fiscalYearQuarter": "3/2022",
+      "fiscalWeek": 38,
+      "fiscalYearWeek": "38/2022",
+      "fiscalDayOfYear": 188,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2021,
+      "fiscalPeriod": "456",
+      "fiscalYearPeriod": "456/2021",
+      "fiscalQuarter": 4,
+      "fiscalYearQuarter": "4/2021",
+      "fiscalWeek": 51,
+      "fiscalYearWeek": "51/2021",
+      "fiscalDayOfYear": 221,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2020,
+      "fiscalPeriod": "567",
+      "fiscalYearPeriod": "567/2020",
+      "fiscalQuarter": 1,
+      "fiscalYearQuarter": "1/2020",
+      "fiscalWeek": 10,
+      "fiscalYearWeek": "10/2020",
+      "fiscalDayOfYear": 80,
+      "isSelected": false
+    },
+    {
+      "fiscalYear": 2018,
+      "fiscalPeriod": "678",
+      "fiscalYearPeriod": "678/2018",
+      "fiscalQuarter": 2,
+      "fiscalYearQuarter": "2/2018",
+      "fiscalWeek": 20,
+      "fiscalYearWeek": "20/2018",
+      "fiscalDayOfYear": 130,
+      "isSelected": false
+    }
+  ]
+}
