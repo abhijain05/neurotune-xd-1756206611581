@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebDynpro xmlns="http://www.sap.com/wd/webdynpro">
+  <View name="FiscalDataView">
+    <Title>Fiscal Information</Title>
+    <FlowLayout id="rootLayout" padding="10px">
+      <!-- Top Action Bar -->
+      <FlowLayout id="actionBar" hAlign="Right" padding="2px">
+        <Button id="goButton" text="Go" design="Emphasized" onAction="onActionGo"/>
+        <Link id="hideFilterBarLink" text="Hide Filter Bar" onAction="onActionHideFilterBar"/>
+        <Link id="filtersLink" text="Filters (1)" onAction="onActionFilters"/>
+      </FlowLayout>
+
+      <!-- Filter Bar Container -->
+      <FormContainer id="filterFormContainer" title="Filter Criteria">
+        <MatrixLayout id="filterMatrixLayout" columns="4" cellPadding="3px">
+          <MatrixHead>
+            <MatrixRow>
+              <MatrixData>
+                <Label id="labelFiscalYear" text="Fiscal Year:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalYear" value="{/filters/fiscalYear}" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalYear"/>
+              </MatrixData>
+              <MatrixData>
+                <Label id="labelFiscalPeriod" text="Fiscal Period:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalPeriod" value="{/filters/fiscalPeriod}" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalPeriod"/>
+              </MatrixData>
+            </MatrixRow>
+            <MatrixRow>
+              <MatrixData>
+                <Label id="labelFiscalYearPeriod" text="Fiscal Year Period:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalYearPeriod" value="{/filters/fiscalYearPeriod}" placeholder="PPP/YYYY" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalYearPeriod"/>
+              </MatrixData>
+              <MatrixData>
+                <Label id="labelFiscalQuarter" text="Fiscal Quarter:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalQuarter" value="{/filters/fiscalQuarter}" value="=1 x" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalQuarter"/>
+              </MatrixData>
+            </MatrixRow>
+            <MatrixRow>
+              <MatrixData>
+                <Label id="labelFiscalYearQuarter" text="Fiscal Year Quarter:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalYearQuarter" value="{/filters/fiscalYearQuarter}" placeholder="Q/YYYY" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalYearQuarter"/>
+              </MatrixData>
+              <MatrixData>
+                <Label id="labelFiscalWeek" text="Fiscal Week:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalWeek" value="{/filters/fiscalWeek}" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalWeek"/>
+              </MatrixData>
+            </MatrixRow>
+            <MatrixRow>
+              <MatrixData>
+                <Label id="labelFiscalYearWeek" text="Fiscal Year Week:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalYearWeek" value="{/filters/fiscalYearWeek}" placeholder="WW/YYYY" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalYearWeek"/>
+              </MatrixData>
+              <MatrixData>
+                <Label id="labelFiscalDayOfYear" text="Fiscal Day Of Year:"/>
+              </MatrixData>
+              <MatrixData>
+                <InputField id="inputFiscalDayOfYear" value="{/filters/fiscalDayOfYear}" valueHelpMode="Automatic" onValueHelpRequest="onValueHelpFiscalDayOfYear"/>
+              </MatrixData>
+            </MatrixRow>
+          </MatrixHead>
+        </MatrixLayout>
+      </FormContainer>
+      <!-- Pin icon below filter bar -->
+      <Toolbar id="filterPinToolbar" hAlign="Right">
+        <ToolbarItem type="Transparent" tooltip="Pin Filter Bar">
+          <Button id="pinFilterBarButton" text="" iconSrc="sap-icon://pushpin-off" onAction="onActionPinFilterBar" design="Transparent"/>
+        </ToolbarItem>
+      </Toolbar>
+
+      <!-- Table Section -->
+      <FlowLayout id="tableHeaderLayout" padding="10px 0 5px 0">
+        <TextView id="tableTitle" text="Fiscal Information (5)" semanticTextType="Title3" layout="FlowData"/>
+        <Toolbar id="tableToolbar" hAlign="Right">
+          <ToolbarItem type="Transparent" tooltip="Copy to clipboard">
+            <Button id="copyButton" text="" iconSrc="sap-icon://copy" onAction="onActionCopyTable" design="Transparent"/>
+          </ToolbarItem>
+          <ToolbarItem type="Transparent" tooltip="Settings">
+            <Button id="settingsButton" text="" iconSrc="sap-icon://settings" onAction="onActionSettingsTable" design="Transparent"/>
+          </ToolbarItem>
+          <ToolbarItem type="Transparent" tooltip="Manage Views">
+            <Button id="personalizeButton" text="" iconSrc="sap-icon://table-view" onAction="onActionPersonalizeTable" design="Transparent"/>
+          </ToolbarItem>
+          <ToolbarItem type="Transparent" tooltip="More Options">
+            <DropDownByIndex id="tableOptionsDropdown" onSelect="onActionTableOptions" selectedKey="{/tableOptions/selectedKey}">
+              <!-- Assuming there are dropdown items, e.g., <Item text="Export" key="Export"/> -->
+            </DropDownByIndex>
+          </ToolbarItem>
+        </Toolbar>
+      </FlowLayout>
+
+      <Table id="fiscalDataTable" dataSource="{/fiscalInformation}" selectionMode="Multi" width="100%">
+        <Columns>
+          <Column id="colSelect" width="30px">
+            <template>
+              <CheckBox id="headerCheckbox" onToggle="onToggleSelectAll"/>
+            </template>
+            <template>
+              <CheckBox id="rowCheckbox" selected="{isSelected}" onToggle="onToggleSelectRow"/>
+            </template>
+          </Column>
+          <Column id="colFiscalYear" text="Fiscal Year">
+            <template>
+              <TextView text="{fiscalYear}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalPeriod" text="Fiscal Period">
+            <template>
+              <TextView text="{fiscalPeriod}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalYearPeriod" text="Fiscal Year Period">
+            <template>
+              <TextView text="{fiscalYearPeriod}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalQuarter" text="Fiscal Quarter">
+            <template>
+              <TextView text="{fiscalQuarter}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalYearQuarter" text="Fiscal Year Q...">
+            <template>
+              <TextView text="{fiscalYearQuarter}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalWeek" text="Fiscal Week">
+            <template>
+              <TextView text="{fiscalWeek}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalYearWeek" text="Fiscal Year We...">
+            <template>
+              <TextView text="{fiscalYearWeek}"/>
+            </template>
+          </Column>
+          <Column id="colFiscalDayOfYear" text="Fiscal Day O...">
+            <template>
+              <TextView text="{fiscalDayOfYear}"/>
+            </template>
+          </Column>
+        </Columns>
+      </Table>
+    </FlowLayout>
+  </View>
+  <Controller name="FiscalDataViewController">
+    <Methods>
+      <Method name="onActionGo">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Implements filtering logic based on input fields and refreshes the table data.
+            // Example:
+            // IWDNode filterNode = wdContext.nodeFilters();
+            // String fiscalYear = filterNode.currentFiscalYearElement().getFiscalYear();
+            // ... retrieve all filter values ...
+            // call backend service to fetch data
+            // wdContext.nodeFiscalInformation().invalidate(); // Invalidate and reload the node
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionHideFilterBar">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Toggles the visibility of the filter bar (FormContainer).
+            // Example:
+            // IWDUIElement filterBar = (IWDUIElement)wdComponentAPI.getUIElements().get("filterFormContainer");
+            // filterBar.setVisible(!filterBar.isVisible());
+            // Update the text of "hideFilterBarLink" to "Show Filter Bar" as needed.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionFilters">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Triggers a pop-up or navigation to a filter management screen.
+            // The "(1)" indicates the number of active filters.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalYear">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Year.
+            // Example:
+            // wdComponentAPI.getWindowManager().createModalWindow("ValueHelpFiscalYearView", "Select Fiscal Year").show();
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalPeriod">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Period.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalYearPeriod">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Year Period.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalQuarter">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Quarter.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalYearQuarter">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Year Quarter.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalWeek">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Week.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalYearWeek">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Year Week.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onValueHelpFiscalDayOfYear">
+        <Parameters>
+          <Parameter name="wdEvent" type="com.sap.tc.webdynpro.progmodel.api.IWDEvent"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Opens a value help dialog for selecting a Fiscal Day Of Year.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionPinFilterBar">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Toggles the pin state of the filter bar, potentially saving/loading filter preferences.
+            // Updates the icon (e.g., from pushpin-off to pushpin-on).
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionCopyTable">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Copies the selected table data to the user's clipboard.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionSettingsTable">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Opens a dialog for configuring table settings (e.g., column visibility, sorting, grouping).
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionPersonalizeTable">
+        <Parameters/>
+        <Code>
+          <![CDATA[
+            // Opens a dialog for managing personalized table views or layouts.
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onActionTableOptions">
+        <Parameters>
+          <Parameter name="key" type="java.lang.String"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Handles actions selected from the table options dropdown (e.g., Export to Excel, Print).
+            // Example:
+            // if (key.equals("Export")) { /* ... export logic ... */ }
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onToggleSelectAll">
+        <Parameters>
+          <Parameter name="checked" type="boolean"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Selects or deselects all rows in the table based on the 'checked' parameter.
+            // Example:
+            // IWDNode fiscalInfoNode = wdContext.nodeFiscalInformation();
+            // for (IWDNodeElement element : fiscalInfoNode.getChildren()) {
+            //   element.setAttributeValue("isSelected", checked);
+            // }
+          ]]>
+        </Code>
+      </Method>
+      <Method name="onToggleSelectRow">
+        <Parameters>
+          <Parameter name="checked" type="boolean"/>
+        </Parameters>
+        <Code>
+          <![CDATA[
+            // Toggles the selection state of an individual table row.
+            // The 'isSelected' attribute on the context element of the row is updated.
+            // Example:
+            // wdContext.currentFiscalInformationElement().setIsSelected(checked);
+          ]]>
+        </Code>
+      </Method>
+    </Methods>
+  </Controller>
+</WebDynpro>

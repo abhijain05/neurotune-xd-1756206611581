@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
+  xmlns:richtexteditor="sap.ui.richtexteditor"
+  xmlns:viz="sap.viz.ui5"
+  controllerName="preview.app.controller.FiscalDataView"
+  displayBlock="true">
+  <Page title="FiscalDataView" enableScrolling="true">
+    <content>
+      <Title id="title_uxl2q6kr" text="Fiscal Information"/>
+      <form:SimpleForm id="rootLayout">
+        <form:SimpleForm id="actionBar">
+          <Button id="goButton" text="Go" press="onOnActionGo"/>
+          <Link id="hideFilterBarLink" text="Hide Filter Bar" press="onOnActionHideFilterBar"/>
+          <Link id="filtersLink" text="Filters (1)" press="onOnActionFilters"/>
+        </form:SimpleForm>
+        <form:SimpleForm id="tableHeaderLayout">
+          <Text id="tableTitle" text="Fiscal Information (5)"/>
+          <Text id="tableToolbar"/>
+        </form:SimpleForm>
+        <form:SimpleForm id="filterFormContainer" title="Filter Criteria">
+          <layout:Grid id="filterMatrixLayout"/>
+        </form:SimpleForm>
+        <layout:VerticalLayout id="filterPinToolbar">
+          <Text id="toolbaritem_kx4jscu1"/>
+        </layout:VerticalLayout>
+        <Table id="fiscalDataTable" width="100%">
+          <Text id="columns_um23tsu0"/>
+        </Table>
+      </form:SimpleForm>
+    </content>
+  </Page>
+</mvc:View>
